@@ -1,0 +1,15 @@
+*{
+    box-sizing: border-box;
+    
+}
+
+body {
+    font-size: 18px;
+    font-family:'Times New Roman', Times, serif;
+}
+
+.jumbotron {
+    background-image: linear-gradient(to right, #766dee, #0f083d);
+    color: white;
+
+}
