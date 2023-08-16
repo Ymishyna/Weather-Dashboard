@@ -79,8 +79,8 @@ function getCoordinates(search) {
         console.error("City not found.");
         return;
       }
-      saveSearchHistory(data[0].name); 
-      getWeather(data[0]); 
+      saveSearchHistory(data[0].name);
+      getWeather(data[0]);
       currentWeatherEl.classList.remove('d-none');
       futureWeatherEl.classList.remove('d-none');
     })
@@ -125,7 +125,7 @@ function displayCurrent(weather, city) {
 
   var heading = document.createElement('h4');
   heading.setAttribute('class', 'card-title pt-2');
-  heading.style.fontWeight = 'bold '; 
+  heading.style.fontWeight = 'bold ';
   heading.textContent = `${city} (${currentDate})`;
   card.appendChild(heading);
   card.append(cardBody);
