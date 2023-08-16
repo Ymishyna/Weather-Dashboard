@@ -51,7 +51,7 @@ function saveSearchHistory(city) {
   }
 }
 
-// validating input
+// validating input. // purpose is to validate that there is a value in the input box
 function inputValidate(e) {
   e.preventDefault();
 
@@ -108,6 +108,7 @@ function getWeather(location) {
     });
 }
 
+// current weather
 function displayCurrent(weather, city) {
   var temp = weather.main.temp;
   var windSpeed = weather.wind.speed;
@@ -228,3 +229,12 @@ function prepareForecastData(forecastList) {
 
   return forecastData;
 }
+
+// event listener for the button (search) - "click", inputValidate
+btnSearchEl.addEventListener('click', inputValidate)
+
+displaySearchHistory(); // call for display search history
+addSearchHistoryClickEvent(); // click event listeners to search history items
+
+// initial call to fetch and display weather data when the page loads
+getCoordinates(''); // default city
