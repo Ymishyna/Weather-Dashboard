@@ -41,7 +41,7 @@ Libraries: Bootstrap
 
 
 Deployed Site Link:
-http://ymishyna.github.io/Weather-Dashboard/
+https://ymishyna.github.io/Weather-Dashboard/
 
 GitHub Link:
 https://github.com/Ymishyna/Weather-Dashboard
