@@ -161,3 +161,29 @@ function displayForecast(forecastData) {
     forecastRow.appendChild(forecastColumn);
   }
 }
+
+// Function to prepare forecast data for display
+function prepareForecastData(forecastList) {
+  var forecastData = [];
+
+  for (var i = 0; i < forecastList.length; i += 8) {
+    var forecast = forecastList[i];
+    var date = forecast.dt_txt.split(' ')[0];
+    var icon = `https://openweathermap.org/img/w/${forecast.weather[0].icon}.png`;
+    var description = forecast.weather[0].description;
+    var temp = forecast.main.temp;
+    var wind = forecast.wind.speed;
+    var humidity = forecast.main.humidity;
+
+    forecastData.push({
+      date: date,
+      icon: icon,
+      description: description,
+      temp: temp,
+      wind: wind,
+      humidity: humidity,
+    });
+  }
+
+  return forecastData;
+}
