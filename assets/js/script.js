@@ -5,8 +5,53 @@ var currentWeatherEl = document.getElementById("current-weather");
 var futureWeatherEl = document.getElementById("future-weather");
 var searchHistoryEl = document.getElementById("search-history");
 
+// displaying search history
+function displaySearchHistory() {
+  var searchHistory = localStorage.getItem("searchHistory");
+  if (searchHistory) {
+    var cities = JSON.parse(searchHistory);
+    searchHistoryEl.innerHTML = "";
+    cities.forEach(function (city) {
+      var searchItem = document.createElement("p");
+      searchItem.textContent = city;
+      searchHistoryEl.appendChild(searchItem);
+    });
+  }
+}
 
-// Function to validate input
+// click event listeners for search history items
+function addSearchHistoryClickEvent() {
+  var searchItems = searchHistoryEl.getElementsByTagName("p");
+  for (var i = 0; i < searchItems.length; i++) {
+    var searchItem = searchItems[i];
+    searchItem.addEventListener("click", function () {
+      var cityName = this.textContent;
+      getCoordinates(cityName);
+    });
+  }
+}
+
+// saving search history
+function saveSearchHistory(city) {
+  var searchHistory = localStorage.getItem("searchHistory");
+  if (!searchHistory) {
+    searchHistory = [];
+  } else {
+    searchHistory = JSON.parse(searchHistory);
+  }
+
+  if (!searchHistory.includes(city)) {
+    searchHistory.unshift(city);
+    if (searchHistory.length > 5) {
+      searchHistory.pop();
+    }
+    localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+    displaySearchHistory();
+    addSearchHistoryClickEvent();
+  }
+}
+
+// validating input
 function inputValidate(e) {
   e.preventDefault();
 
@@ -21,7 +66,7 @@ function inputValidate(e) {
   searchInputEl.value = "";
 }
 
-// Function to fetch coordinates of the city
+// fetching coordinates of the city
 function getCoordinates(search) {
   var apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=82b45b8d50fb832bca393df388f7502c`;
 
@@ -34,18 +79,16 @@ function getCoordinates(search) {
         console.error("City not found.");
         return;
       }
-      saveSearchHistory(data[0].name); // Save search history
-      getWeather(data[0]); // Move this line here
+      saveSearchHistory(data[0].name); 
+      getWeather(data[0]); 
       currentWeatherEl.classList.remove('d-none');
       futureWeatherEl.classList.remove('d-none');
     })
     .catch(function (error) {
-
     });
 }
 
-
-// Function to get and display weather data
+// displaying weather data
 function getWeather(location) {
   var { lat, lon } = location;
   var city = location.name;
@@ -81,19 +124,17 @@ function displayCurrent(weather, city) {
 
   var heading = document.createElement('h4');
   heading.setAttribute('class', 'card-title pt-2');
-  heading.style.fontWeight = 'bold '; // Apply inline style for bold text
+  heading.style.fontWeight = 'bold '; 
   heading.textContent = `${city} (${currentDate})`;
   card.appendChild(heading);
   card.append(cardBody);
 
-
   var icon = `https://openweathermap.org/img/w/${weather.weather[0].icon}.png`;
-  // Add weather icon
+  // weather icon
   var iconImg = document.createElement('img');
   iconImg.setAttribute('src', icon);
   iconImg.setAttribute('alt', 'Weather Icon');
   cardBody.appendChild(iconImg);
-
 
   var tempEl = document.createElement('p');
   tempEl.setAttribute('class', 'card-text');
@@ -113,10 +154,10 @@ function displayCurrent(weather, city) {
   currentContainer.appendChild(card);
 }
 
-// Function to display the 5-day forecast
+// displaying the 5-day forecast
 function displayForecast(forecastData) {
   var forecastRow = document.getElementById('forecast-row');
-  forecastRow.innerHTML = ''; // Clear existing forecast data
+  forecastRow.innerHTML = ''; // clear existing forecast data
 
   for (var i = 0; i < forecastData.length; i++) {
     var forecast = forecastData[i];
@@ -162,7 +203,7 @@ function displayForecast(forecastData) {
   }
 }
 
-// Function to prepare forecast data for display
+// preparing forecast data for display
 function prepareForecastData(forecastList) {
   var forecastData = [];
 
