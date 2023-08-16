@@ -1,6 +1,5 @@
 *{
     box-sizing: border-box;
-    
 }
 
 body {
@@ -9,7 +8,10 @@ body {
 }
 
 .jumbotron {
-    background-image: linear-gradient(to right, #766dee, #0f083d);
+    background-image: linear-gradient(to right, #918aed, #0e073c);
     color: white;
+}
 
+h4 {
+    padding-left: 13px;
 }
