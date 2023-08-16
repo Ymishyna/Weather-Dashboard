@@ -68,7 +68,7 @@ function inputValidate(e) {
 
 // fetching coordinates of the city
 function getCoordinates(search) {
-  var apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=82b45b8d50fb832bca393df388f7502c`;
+  var apiURL = `https://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=82b45b8d50fb832bca393df388f7502c`;
 
   fetch(apiURL)
     .then(function (response) {
