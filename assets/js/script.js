@@ -113,3 +113,51 @@ function displayCurrent(weather, city) {
   currentContainer.appendChild(card);
 }
 
+// Function to display the 5-day forecast
+function displayForecast(forecastData) {
+  var forecastRow = document.getElementById('forecast-row');
+  forecastRow.innerHTML = ''; // Clear existing forecast data
+
+  for (var i = 0; i < forecastData.length; i++) {
+    var forecast = forecastData[i];
+    var forecastColumn = document.createElement('div');
+    forecastColumn.className = 'col-md-2';
+
+    var forecastCard = document.createElement('div');
+    forecastCard.className = 'card mb-3 bg-dark';
+
+    var forecastCardBody = document.createElement('div');
+    forecastCardBody.className = 'card-body text-white';
+
+    var forecastDate = document.createElement('h6');
+    forecastDate.className = 'card-title';
+    forecastDate.textContent = forecast.date;
+
+    var forecastIcon = document.createElement('img');
+    forecastIcon.className = 'weather-icon';
+    forecastIcon.src = forecast.icon;
+    forecastIcon.alt = forecast.description;
+
+    var forecastTemp = document.createElement('p');
+    forecastTemp.className = 'card-text';
+    forecastTemp.textContent = `Temp: ${forecast.temp} °C`;
+
+    var forecastWind = document.createElement('p');
+    forecastWind.className = 'card-text';
+    forecastWind.textContent = `Wind: ${forecast.wind} m/s`;
+
+    var forecastHumidity = document.createElement('p');
+    forecastHumidity.className = 'card-text';
+    forecastHumidity.textContent = `Humidity: ${forecast.humidity} %`;
+
+    forecastCardBody.appendChild(forecastDate);
+    forecastCardBody.appendChild(forecastIcon);
+    forecastCardBody.appendChild(forecastTemp);
+    forecastCardBody.appendChild(forecastWind);
+    forecastCardBody.appendChild(forecastHumidity);
+
+    forecastCard.appendChild(forecastCardBody);
+    forecastColumn.appendChild(forecastCard);
+    forecastRow.appendChild(forecastColumn);
+  }
+}
